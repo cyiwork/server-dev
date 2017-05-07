@@ -1,2 +1,1 @@
-# server-dev
-Developer Project Environment Setup
+# Developer Project Environment Setup
