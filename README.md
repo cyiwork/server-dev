@@ -13,7 +13,7 @@
 
 - Update '/etc/hosts' file
 
-```
+    ```
     echo 192.168.59.76   testbox.dev www.testbox.dev | sudo tee -a /etc/hosts
     ```
 
