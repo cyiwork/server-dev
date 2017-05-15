@@ -12,12 +12,16 @@
                 <h3>User Records</h3>
             </div>
             <div class="row">
+              <p>
+                  <a href="create.php" class="btn btn-success">Create</a>
+              </p>
                 <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th>Email</th>
                       <th>First Name</th>
                       <th>Last Name</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -30,6 +34,7 @@
                             echo '<td>'. $row['email'] . '</td>';
                             echo '<td>'. $row['first_name'] . '</td>';
                             echo '<td>'. $row['last_name'] . '</td>';
+                            echo '<td><a class="btn" href="read.php?id='.$row['id'].'">Read</a></td>';
                             echo '</tr>';
                    }
                    Database::disconnect();
