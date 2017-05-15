@@ -25,3 +25,13 @@
 
 - Install LEMP stack
 - Add index.php to validate devbox is working
+
+## CRUD
+
+- configured mysql database
+- dummy info loaded into database
+- php pages created to test functionality of CRUD
+
+## Application
+
+- start testing through 'index.php'
