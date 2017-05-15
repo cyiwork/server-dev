@@ -1,54 +1,38 @@
 <?php
-	// 1. Create a database connection
-	$dbhost = "localhost";
-	$dbuser = "my_app";
-	$dbpass = "secret";
-	$dbname = "my_app";
-	$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+class Database
+{
+    private static $dbName = 'my_app' ;
+    private static $dbHost = 'localhost' ;
+    private static $dbUsername = 'my_app';
+    private static $dbUserPassword = 'secret';
 
-// Test if connection occured.
-	if(mysqli_Connect_errno()) {
-		die("Database connection failed: " .
-			mysqli_connect_error() .
-			" (" . mysqli_Connect_errno() . ")"
-		);
-	}
+    private static $cont  = null;
+
+    public function __construct() {
+        die('Init function is not allowed');
+    }
+
+    public static function connect()
+    {
+       // One connection through whole application
+       if ( null == self::$cont )
+       {
+        try
+        {
+          self::$cont =  new PDO( "mysql:host=".self::$dbHost.";"."dbname=".self::$dbName, self::$dbUsername, self::$dbUserPassword);
+        }
+        catch(PDOException $e)
+        {
+          die($e->getMessage());
+        }
+       }
+       return self::$cont;
+    }
+
+    public static function disconnect()
+    {
+        self::$cont = null;
+    }
+}
 ?>
-
-<?php
-	// 2. Perform database query
-	$query = "SELECT * FROM user_records";
-	$result = mysqli_query($connection, $query);
-	// Test if there was a query error
-	if (!$result) {
-		die("Database quesry failed.");
-	}
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Databases</title>
-	</head>
-	<body>
-	<?php
-	  //3. Use returned data (if any)
-	  while($row = mysqli_fetch_row($result)) {
-		// output data from each row
-		var_dump($row);
-		echo "<hr />";
-	  }
-	?>
-
-	<?php
-	  // 4. Release returned data
-	  mysqli_free_result($result);
-	?>
-
-	</body>
-</html>
-
-<?php
-	// 5. Close Database Connection
-	mysqli_close($connection);
-?>
+        
