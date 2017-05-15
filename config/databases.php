@@ -1,37 +1,16 @@
 <?php
-class Database
-{
-    private static $dbName = 'my_app' ;
-    private static $dbHost = 'localhost' ;
-    private static $dbUsername = 'my_app';
-    private static $dbUserPassword = 'secret';
+// used to connect to the database
+$host = "localhost";
+$db_name = "my_app";
+$username = "my_app";
+$password = "secret";
 
-    private static $cont  = null;
+try {
+    $con = new PDO("mysql:host={$host};dbname={$db_name}", $username, $password);
+}
 
-    public function __construct() {
-        die('Init function is not allowed');
-    }
-
-    public static function connect()
-    {
-       // One connection through whole application
-       if ( null == self::$cont )
-       {
-        try
-        {
-          self::$cont =  new PDO( "mysql:host=".self::$dbHost.";"."dbname=".self::$dbName, self::$dbUsername, self::$dbUserPassword);
-        }
-        catch(PDOException $e)
-        {
-          die($e->getMessage());
-        }
-       }
-       return self::$cont;
-    }
-
-    public static function disconnect()
-    {
-        self::$cont = null;
-    }
+// show error
+catch(PDOException $exception){
+    echo "Connection error: " . $exception->getMessage();
 }
 ?>
