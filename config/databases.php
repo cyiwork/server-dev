@@ -31,15 +31,17 @@
 		<title>Databases</title>
 	</head>
 	<body>
+		<ul>
 	<?php
 	  //3. Use returned data (if any)
-	  while($row = mysqli_fetch_row($result)) {
+	  while($subject = mysqli_fetch_assoc($result)) {
 		// output data from each row
-		var_dump($row);
-		echo "<hr />";
+	?>
+			<li><?php echo $subject["email"] . " (" . $subject["id"] . ")"; ?></li>
+	<?php
 	  }
 	?>
-
+		</ul>
 	<?php
 	  // 4. Release returned data
 	  mysqli_free_result($result);
